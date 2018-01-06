@@ -4,14 +4,14 @@
 <head>
 	<meta charset="utf-8" />
   	<meta name="viewport" content="width=device-width" />
- 	<link rel="stylesheet" href="/engine/static/css/normalize.css" />
-  	<link rel="stylesheet" href="/engine/static/css/foundation.min.css" />
-  	<link rel="stylesheet" href="/engine/static/css/heritrix.css" />
-  	<script src="/engine/static/js/vendor/custom.modernizr.js"></script>
+    <base href='${rootRef}'/>
+ 	<link rel="stylesheet" href="engine/static/css/normalize.css" />
+  	<link rel="stylesheet" href="engine/static/css/foundation.min.css" />
+  	<link rel="stylesheet" href="engine/static/css/heritrix.css" />
+  	<script src="engine/static/js/vendor/custom.modernizr.js"></script>
   
 	<title>${job.shortName} - ${job.statusDescription} - Job main page</title>
-	<base href='${baseRef}'/>
-	
+
 </head>
 <body>
 <form method='POST'>
@@ -19,7 +19,7 @@
 		<nav class="top-bar">
 	 		<ul class="title-area">
 				<li class=" name" >
-					<h1><img alt="Heritrix" class="hide-for-small" style="padding-top:4px;" src="/engine/static/img/heritrix-logo.gif" />
+					<h1><img alt="Heritrix" class="hide-for-small" style="padding-top:4px;" src="engine/static/img/heritrix-logo.gif" />
 						<span class="hide-for-medium-up">Heritrix</span>
 		    		</h1>
 				</li>
@@ -49,27 +49,27 @@
 						</ul>
 					</li>
 					<li class="divider"></li>
-					<li><a href="/engine">Engine</a></li>
+					<li><a href="engine">Engine</a></li>
 					<li class="divider"></li>
-					<li><a href="jobdir">Job Dir</a></li>
+					<li><a href="engine/job/${job.shortName}/jobdir">Job Dir</a></li>
 					<li class="divider"></li>
-					<li ><a href="/engine/job/${job.shortName}/jobdir/${job.configurationFilePath.name}?format=textedit">Configuration</a></li>
+					<li ><a href="engine/job/${job.shortName}/jobdir/${job.configurationFilePath.name}?format=textedit">Configuration</a></li>
 					<li class="divider"></li>
 					<li ><a href="#" data-reveal-id="copyJobModal">Copy Job</a></li>
 					<li class="divider"></li>
 					<li>
 					<#if job.hasApplicationContext>
-					<a href="script">Scripting Console</a>
+					<a href="engine/job/${job.shortName}/script">Scripting Console</a>
 					<#else>
-					<a href="#" style="color:#444">Scripting Console</a>
+					<a href="engine/job/${job.shortName}#" style="color:#444">Scripting Console</a>
 					</#if>
 					</li>
 					<li class="divider"></li>
 		   			<li>
 					<#if job.hasApplicationContext>
-					<a href="beans"}>Browse Beans</a>
+					<a href="engine/job/${job.shortName}/beans"}>Browse Beans</a>
 					<#else>
-					<a href="#" style="color:#444">Browse Beans</a>
+					<a href="engine/job/${job.shortName}#" style="color:#444">Browse Beans</a>
 					</#if>
 		  			</li>
 					<li class="divider"></li>
@@ -137,7 +137,7 @@
 
 <div class="row">
 	<div class="large-12 columns">
-		<h3>Job Log <a href="/engine/job/${job.shortName}/jobdir/job.log?format=paged&pos=-1&lines=-128&reverse=y">more</a></h3>
+		<h3>Job Log <a href="engine/job/${job.shortName}/jobdir/job.log?format=paged&pos=-1&lines=-128&reverse=y">more</a></h3>
 		<div class="row">
 			<div class="large-12 columns">
 				<div class="log-viewer">
@@ -190,7 +190,7 @@
 							<i>none</i>
 							<#else>
 							${job.alertCount}
-							<a href="/engine/anypath/${job.alertLogFilePath}?format=paged&amp;pos=-1&amp;lines=-128">tail alert log...</a></li>
+							<a href="engine/anypath/${job.alertLogFilePath}?format=paged&amp;pos=-1&amp;lines=-128">tail alert log...</a></li>
 							</#if>
 						</td>
 					</tr>
@@ -225,7 +225,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th><a href="report/ToeThreadsReport">Threads</a></th>
+						<th><a href="engine/job/${job.shortName}/report/ToeThreadsReport">Threads</a></th>
 						<td>
 							<#if !job.threadReport??>
 							<i>n/a</i>
@@ -237,7 +237,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th><a href="report/FrontierSummaryReport">Frontier</a></th>
+						<th><a href="engine/job/${job.shortName}/report/FrontierSummaryReport">Frontier</a></th>
 						<td>
 							<#if !job.frontierReport??>
 							<i>n/a</i>
@@ -262,7 +262,7 @@
 		<h3>Reports</h3>
 		<ul class="no-bullet">
 			<#list job.reports as report>
-			<li><a href="report/${report.className}">${report.shortName}</a></li>
+			<li><a href="engine/job/${job.shortName}/report/${report.className}">${report.shortName}</a></li>
 			</#list>
 		</ul>
 	</div>
@@ -272,7 +272,7 @@
 <#if (job.isRunning || (job.hasApplicationContext && !job.isLaunchable))>
 <div class="row">
 	<div class="large-12 columns">
-		<h3>Crawl Log <a href="/engine/anypath/${job.crawlLogFilePath}?format=paged&amp;pos=-1&amp;lines=-128&amp;reverse=y">more</a></h3>
+		<h3>Crawl Log <a href="engine/anypath/${job.crawlLogFilePath}?format=paged&amp;pos=-1&amp;lines=-128&amp;reverse=y">more</a></h3>
 		<div class="row">
 			<div class="large-12 columns">
 				<div class="log-viewer" >
@@ -306,7 +306,7 @@
 						</td>
 						<td>
 							<#if config.path??>
-							<a href='/engine/anypath/${config.path}<#if config.path?ends_with("log")>?format=paged&amp;pos=-1&amp;lines=-128&amp;reverse=y</#if>'>${config.path}</a><#if config.editable> [<a href="/engine/anypath/${config.path}?format=textedit">edit</a>]</#if>
+							<a href='engine/anypath/${config.path}<#if config.path?ends_with("log")>?format=paged&amp;pos=-1&amp;lines=-128&amp;reverse=y</#if>'>${config.path}</a><#if config.editable> [<a href="engine/anypath/${config.path}?format=textedit">edit</a>]</#if>
 							<#else>
 							<i>unset</i>
 							</#if>
@@ -322,11 +322,11 @@
 	
 <script>
   document.write('<script src=' +
-  ('__proto__' in {} ? '/engine/static/js/vendor/zepto' : 'js/vendor/jquery') +
+  ('__proto__' in {} ? 'engine/static/js/vendor/zepto' : 'js/vendor/jquery') +
   '.js><\/script>')
 </script>
   
-<script src="/engine/static/js/foundation.min.js"></script>
+<script src="engine/static/js/foundation.min.js"></script>
 <script>
   $(document).foundation();
 </script>

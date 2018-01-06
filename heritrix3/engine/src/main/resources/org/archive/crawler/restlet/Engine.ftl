@@ -6,13 +6,12 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
 	<title>Heritrix Engine ${engine.heritrixVersion}</title>
-	<link rel="stylesheet" href="/engine/static/css/normalize.css" />
-	<link rel="stylesheet" href="/engine/static/css/foundation.min.css" />
-	<link rel="stylesheet" href="/engine/static/css/heritrix.css" />
-	<script src="/engine/static/js/vendor/custom.modernizr.js"></script>
-	
-	<base href='${baseRef}'/>
-	
+    <base href='${rootRef}'/>
+	<link rel="stylesheet" href="engine/static/css/normalize.css" />
+	<link rel="stylesheet" href="engine/static/css/foundation.min.css" />
+	<link rel="stylesheet" href="engine/static/css/heritrix.css" />
+	<script src="engine/static/js/vendor/custom.modernizr.js"></script>
+
 </head>
 
 <body>
@@ -22,7 +21,7 @@
 	    <!-- Title Area -->
 	    <li class=" name" >
 	    	<h1>
-	    		<span style="color:#FFFFFF"><span class="hide-for-medium-up" >Heritrix</span><img alt="Heritrix" class="hide-for-small" style="padding-top:4px; padding-right:10px;" src="/engine/static/img/heritrix-logo.gif" /> ${engine.heritrixVersion}</span>
+	    		<span style="color:#FFFFFF"><span class="hide-for-medium-up" >Heritrix</span><img alt="Heritrix" class="hide-for-small" style="padding-top:4px; padding-right:10px;" src="engine/static/img/heritrix-logo.gif" /> ${engine.heritrixVersion}</span>
     		</h1>
 	    </li>
 	  </ul>
@@ -73,7 +72,7 @@
 				<#list engine.jobs as crawlJob>
 				<#if crawlJob.hasApplicationContext>
 				<label for='ignore__${crawlJob.key}' style="color:#d9534f">
-					<input type='checkbox' id="ignore__${crawlJob.key}" name='ignore__${crawlJob.key}'> ignore &laquo;${crawlJob.statusDescription}&raquo; job <a href="/engine/job/${crawlJob.shortName}">${crawlJob.key}</a> 
+					<input type='checkbox' id="ignore__${crawlJob.key}" name='ignore__${crawlJob.key}'> ignore &laquo;${crawlJob.statusDescription}&raquo; job <a href="engine/job/${crawlJob.shortName}">${crawlJob.key}</a>
 				</label>
 				</#if>
 				</#list>
@@ -99,7 +98,7 @@
 				<form method='POST'>
 					<h2 style="margin-bottom:0;display:inline;line-height:1">Job Directories</h2>
 					<input class="small inline button text-bottom" type='submit' name='action' value='rescan' />
-					<h5 style="margin:0">parent directory <a href='jobsdir'>${engine.jobsDir}</a></h5>
+					<h5 style="margin:0">parent directory <a href='engine/jobsdir'>${engine.jobsDir}</a></h5>
 					<div>${engine.jobs?size} known job directories</div>
 				</form>
 			</div>
@@ -126,7 +125,7 @@
 			<#list twoJobs as crawlJob>
 			<div class="large-6 columns" style="margin-bottom:1em">
 				<h5 style="margin-bottom:0">
-					<a href="/engine/job/${crawlJob.shortName}">${crawlJob.shortName}</a>
+					<a href="engine/job/${crawlJob.shortName}">${crawlJob.shortName}</a>
 					<#if crawlJob.hasApplicationContext>
 					&laquo;${crawlJob.statusDescription}&raquo;
 					</#if>

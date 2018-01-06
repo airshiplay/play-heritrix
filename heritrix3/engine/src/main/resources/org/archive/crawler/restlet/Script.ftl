@@ -5,22 +5,23 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width" />
-	<link rel="stylesheet" href="/engine/static/css/normalize.css" />
-	<link rel="stylesheet" href="/engine/static/css/foundation.min.css" />
-	<link rel="stylesheet" href="/engine/static/css/heritrix.css" />
-	<script src="/engine/static/js/vendor/custom.modernizr.js"></script>
+    <base href='${rootRef}'/>
+	<link rel="stylesheet" href="engine/static/css/normalize.css" />
+	<link rel="stylesheet" href="engine/static/css/foundation.min.css" />
+	<link rel="stylesheet" href="engine/static/css/heritrix.css" />
+	<script src="engine/static/js/vendor/custom.modernizr.js"></script>
 	
 	<title>Script in ${model.crawlJobShortName}</title>
 	
-	<link rel='stylesheet' href='/engine/static/codemirror/codemirror.css'>
-	<link rel='stylesheet' href='/engine/static/codemirror/util/dialog.css'>
-	<script src='/engine/static/codemirror/codemirror.js'></script>
-	<script src='/engine/static/codemirror/mode/groovy.js'></script>
-	<script src='/engine/static/codemirror/mode/clike.js'></script>
-	<script src='/engine/static/codemirror/mode/javascript.js'></script>
-	<script src='/engine/static/codemirror/util/dialog.js'></script>
-	<script src='/engine/static/codemirror/util/searchcursor.js'></script>
-	<script src='/engine/static/codemirror/util/search.js'></script>
+	<link rel='stylesheet' href='engine/static/codemirror/codemirror.css'>
+	<link rel='stylesheet' href='engine/static/codemirror/util/dialog.css'>
+	<script src='engine/static/codemirror/codemirror.js'></script>
+	<script src='engine/static/codemirror/mode/groovy.js'></script>
+	<script src='engine/static/codemirror/mode/clike.js'></script>
+	<script src='engine/static/codemirror/mode/javascript.js'></script>
+	<script src='engine/static/codemirror/util/dialog.js'></script>
+	<script src='engine/static/codemirror/util/searchcursor.js'></script>
+	<script src='engine/static/codemirror/util/search.js'></script>
 </head>
 <body>
 	<div class="contain-to-grid">
@@ -30,7 +31,7 @@
 					<h1>
 						<img alt="Heritrix" class="hide-for-small"
 							style="padding-top: 4px;"
-							src="/engine/static/img/heritrix-logo.gif" /> <span
+							src="engine/static/img/heritrix-logo.gif" /> <span
 							class="hide-for-medium-up">Heritrix</span>
 					</h1>
 				</li>
@@ -41,9 +42,9 @@
 				<!-- Left Nav Section -->
 				<ul class="right">
 					<li class="divider"></li>
-					<li><a href="/engine">Engine</a></li>
+					<li><a href="engine">Engine</a></li>
 					<li class="divider"></li>
-					<li><a href="/engine/job/${model.crawlJobShortName}">Job "${model.crawlJobShortName}"</a></li>
+					<li><a href="engine/job/${model.crawlJobShortName}">Job "${model.crawlJobShortName}"</a></li>
 					<li class="divider"></li>
 				</ul>
 			</section>
@@ -51,7 +52,7 @@
 	</div>
 	<div class="row">
 		<div class="large-12 columns">
-			<h3>Execute script for job <i><a href='/engine/job/${model.crawlJobShortName}'>${model.crawlJobShortName}</a></i></h3>
+			<h3>Execute script for job <i><a href='engine/job/${model.crawlJobShortName}'>${model.crawlJobShortName}</a></i></h3>
 			<div class="row">
 				<div class="large-12 columns">
 					<div class="panel">

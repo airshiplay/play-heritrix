@@ -218,11 +218,16 @@ public class EngineResource extends BaseResource {
         if(!baseRef.endsWith("/")) {
             baseRef += "/";
         }
+        String rootRef = getRequest().getRootRef().toString();
+        if(!rootRef.endsWith("/")){
+            rootRef += "/";
+        }
         Configuration tmpltCfg = getTemplateConfiguration();
 
         ViewModel viewModel = new ViewModel();
         viewModel.setFlashes(Flash.getFlashes(getRequest()));
         viewModel.put("baseRef",baseRef);
+        viewModel.put("rootRef",rootRef);
         viewModel.put("fileSeparator", File.separator);
         viewModel.put("engine", model);
 
