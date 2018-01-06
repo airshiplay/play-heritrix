@@ -20,12 +20,7 @@ package org.archive.modules.fetcher;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.SortedMap;
+import java.util.*;
 
 import org.apache.commons.collections.collection.CompositeCollection;
 import org.apache.http.client.CookieStore;
@@ -186,7 +181,7 @@ public class BdbCookieStore extends AbstractCookieStore implements
         }
 
         @SuppressWarnings("unchecked")
-        List<Cookie> cookieList = new RestrictedCollectionWrappedList<Cookie>(cookieCollection);
+        List<Cookie> cookieList = new ArrayList<>(cookieCollection);
         LimitedCookieStoreFacade store = new LimitedCookieStoreFacade(cookieList);
         return store;
     }
