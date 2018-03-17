@@ -15,9 +15,13 @@ import java.io.File;
 public class HeritrixComponent extends Component {
 
     public HeritrixComponent() {
-        String jobsDir = StaticConfigSupplier.getConfiguration().getString("heritrix.jobs-dir", "./jobs");
-        getDefaultHost().attach("" , new EngineApplication(new Engine(new File(jobsDir))));
+//        String jobsDir = StaticConfigSupplier.getConfiguration().getString("heritrix.jobs-dir", "./jobs");
+
         getClients().add(Protocol.FILE);
         getClients().add(Protocol.CLAP);
+    }
+
+    public void setEngineApplication(EngineApplication engineApplication){
+        getDefaultHost().attach("" ,engineApplication);
     }
 }

@@ -186,7 +186,7 @@ public class ExtractorHTML extends ContentExtractor implements InitializingBean 
     // matched by the above. attributes known to be URIs of various
     // sorts are matched specially
     static final String EACH_ATTRIBUTE_EXTRACTOR =
-      "(?is)\\s?((href)|(action)|(on\\w*)" // 1, 2, 3, 4 
+      "(?is)\\s?((href|nodeurl)|(action)|(on\\w*)" // 1, 2, 3, 4
      +"|((?:src)|(?:srcset)|(?:lowsrc)|(?:background)|(?:cite)" // ...
      +"|(?:longdesc)|(?:usemap)|(?:profile)|(?:datasrc))" // 5
      +"|(codebase)|((?:classid)|(?:data))|(archive)|(code)" // 6, 7, 8, 9
@@ -195,7 +195,7 @@ public class ExtractorHTML extends ContentExtractor implements InitializingBean 
      +"\\s*=\\s*"
      +"(?:(?:\"(.{0,"+MAX_ATTR_VAL_REPLACE+"}?)(?:\"|$))" // 14
      +"|(?:'(.{0,"+MAX_ATTR_VAL_REPLACE+"}?)(?:'|$))" // 15
-     +"|(\\S{1,"+MAX_ATTR_VAL_REPLACE+"}))"; // 16
+     +"|(\\S{1,"+MAX_ATTR_VAL_REPLACE+"}))";// 16
     // groups:
     // 1: attribute name
     // 2: HREF - single URI relative to doc base, or occasionally javascript:
@@ -369,7 +369,10 @@ public class ExtractorHTML extends ContentExtractor implements InitializingBean 
             CharSequence cs) {
 
         Matcher attr = TextUtils.getMatcher(eachAttributePattern,cs);
-
+        if(cs.toString().contains("nodeurl"))
+        {
+            System.out.println();
+        }
         // Just in case it's an OBJECT or APPLET tag
         String codebase = null;
         ArrayList<String> resources = null;
@@ -407,7 +410,7 @@ public class ExtractorHTML extends ContentExtractor implements InitializingBean 
             value = TextUtils.unescapeHtml(value);
             if (attr.start(2) > -1) {
                 CharSequence context;
-                // HREF
+                // HREF or nodeurl
                 if ("a".equals(element) && TextUtils.matches("(?i).*data-remote\\s*=\\s*([\"'])true.*\\1", cs)) {
                     context = "a[data-remote='true']/@href";
                 } else {

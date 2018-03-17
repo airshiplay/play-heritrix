@@ -1,0 +1,117 @@
+<section class="content-header">
+	<h1>
+		爬取任务列表 <small>开始管理爬取任务</small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#page/center/home"><i class="fa fa-home"></i> Home</a></li>
+		<li><a href="#page/crawlerHeritrix/crawlerTask/crawlerTaskList"><i class="glyphicon glyphicon-list"></i> 爬取任务列表</a></li>
+		<li class="active" th:text="${crawlerTask==null?'新建爬取任务':'编辑爬取任务'}">新建爬取任务</li>
+	</ol>
+</section>
+<!-- Main content -->
+<section class="content" th:inline="text">
+
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title" th:text="${crawlerTask==null?'新建爬取任务':'编辑爬取任务'}">新建爬取任务</h3>
+				</div>
+				<!-- /.box-header -->
+				<!-- form start -->
+				<form role="form" class="crawlertask-form" action="/crawlerHeritrix/crawlerTask/save">
+					<input type="hidden" name="id" th:value="${crawlerTask==null?'':crawlerTask.id}" />
+					<div class="box-body">
+						<div class="form-group required">
+							<label for="taskNameInput" class="control-label">任务名称</label>
+							<input type="text" name="taskName" class="form-control" id="taskNameInput" placeholder="请填写任务名称"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写任务名称"
+		                  		th:value="${crawlerTask==null?'':crawlerTask.taskName}"/>
+						</div>
+						<div class="form-group required">
+		                  <label for="taskTypeInput" class="control-label">任务类型</label>
+		                  <select id="taskTypeInput" name="taskType" class="form-control"  data-bv-notempty="true"
+								data-bv-notempty-message="请选择任务类型" >
+		                  </select>
+		                </div>
+						<div class="form-group required">
+							<label for="seedsInput" class="control-label"><span data-toggle="tooltip" title="例如 http://www.qq.com或"> 任务URL</span></label>
+							<input type="url" name="seeds" class="form-control" id="seedsInput" placeholder="请填写任务URL"
+								 data-bv-notempty="true" data-bv-notempty-message="请填写任务URL"
+		                  		th:value="${crawlerTask==null?'':crawlerTask.seeds}"/>
+						</div>
+						<div class="form-group">
+							<label for="crawlScopeInput" >爬取范围</label>
+							<textarea type="text" name="crawlScope" class="form-control" id="crawlScopeInput" rows="3" placeholder="请填写爬取范围"
+								
+		                  		th:text="${crawlerTask==null?'':crawlerTask.crawlScope}"/>
+						</div>
+						<div class="form-group">
+							<label for="configInput" >任务配置</label>
+							<textarea type="text" name="config" class="form-control" id="configInput" rows="3" placeholder="请填写任务配置"
+								
+		                  		th:text="${crawlerTask==null?'':crawlerTask.config}"/>
+						</div>
+						<div class="form-group">
+							<label for="taskDescInput" >任务描述</label>
+							<textarea type="text" name="taskDesc" class="form-control" id="taskDescInput" rows="3" placeholder="请填写任务描述"
+								
+		                  		th:text="${crawlerTask==null?'':crawlerTask.taskDesc}"/>
+						</div>
+						
+					</div>
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="button" class="btn btn-default" onclick="location.href='#/page/crawlerHeritrix/crawlerTask/crawlerTaskList'">返回列表</button>
+						<button type="submit" class="btn btn-primary pull-right">保存</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script type="text/javascript">
+	require([ "domReady","datetimepickerzh","select2zh","fileinputzh","kindeditor"], function(domReady) {
+		domReady(function() {
+			activeMenu("crawlerHeritrix_crawlertask_list");
+            setPageTitle("");
+		    $taskTypeSelect=$("#taskTypeInput").select2({
+		    	placeholder: '---请选择任务类型---',
+		    	data:[{id:'Download',text:'下载'},{id:'Parse',text:'解析'}]
+		    });//{id:' ',text:' '}
+		    $taskTypeSelect.val("[[${crawlerTask==null?'':crawlerTask.taskType}]]").trigger("change");
+
+			var $form = $(".crawlertask-form");		  
+			$(".crawlertask-form").bootstrapValidator().on('success.form.bv', function(e) {
+				e.preventDefault();
+				var $form = $(e.target);
+				var bv = $form.data('bootstrapValidator');
+				console.log("");
+				$.post($form.attr('action'), $form.serialize(), function(result) {
+					if (result.success) {
+						$.alert({
+							title : false,
+							closeIcon: true,
+							content : "保存成功",
+							confirmButton : "返回列表",
+							confirm : function() {
+								location.href = "#/page/crawlerHeritrix/crawlerTask/crawlerTaskList";
+							}
+						});
+
+					} else {
+						$.alert({
+							title : false,
+							content : result.msg,
+							confirmButton : "关闭"
+						});
+						$form.bootstrapValidator('disableSubmitButtons', false);
+					}
+				}, 'json');
+			});
+		});
+	});
+</script>

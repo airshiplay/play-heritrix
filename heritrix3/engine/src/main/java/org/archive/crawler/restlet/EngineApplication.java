@@ -59,7 +59,7 @@ public class EngineApplication extends Application {
      public synchronized Restlet createRoot() {
         Router router = new Router(getContext());
 
-        router.attach("/",new Redirector(null,"/engine",Redirector.MODE_CLIENT_TEMPORARY));
+        router.attach("/",new Redirector(null,"engine",Redirector.MODE_CLIENT_TEMPORARY));
         router.attach("/engine",EngineResource.class)
             .setMatchingMode(Template.MODE_EQUALS);
         router.attach("/engine/",EngineResource.class)

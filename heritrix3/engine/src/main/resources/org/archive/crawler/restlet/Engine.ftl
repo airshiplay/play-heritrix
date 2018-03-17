@@ -39,7 +39,7 @@
 		<!--flashed message -->
 		<#list flashes as flash>
 		<div data-alert class="alert-box ${(flash.kind=='ACK')?string('success', 'alert')}">
-			${flash.message} <a href="#" class="close">&times;</a>
+			${flash.message} <a href="engine#" class="close">&times;</a>
 		</div>
 		</#list>
 	</div>

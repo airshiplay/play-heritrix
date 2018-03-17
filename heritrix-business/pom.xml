@@ -44,9 +44,19 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <version>${selenium.htmlunit.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.airlenet.play.admin</groupId>
             <artifactId>play-admin-business</artifactId>
             <version>${play.admin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>phantomjsdriver</artifactId>
+            <version>1.4.4</version>
         </dependency>
     </dependencies>
     <build>
@@ -54,6 +64,7 @@
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
+                <version>${apt.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -72,6 +83,14 @@
                         <version>${querydsl.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>com.airlenet.play.maven</groupId>
+                <artifactId>play-generator-plugin</artifactId>
+                <version>${play.admin.version}</version>
+                <configuration>
+                    <moduleName>crawlerHeritrix</moduleName>
+                </configuration>
             </plugin>
         </plugins>
     </build>

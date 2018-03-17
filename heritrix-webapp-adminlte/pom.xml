@@ -26,5 +26,17 @@
             <version>${play.admin.version}</version>
         </dependency>
     </dependencies>
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.airlenet.play.maven</groupId>
+                <artifactId>play-generator-plugin</artifactId>
+                <version>${play.admin.version}</version>
+                <configuration>
+                    <moduleName>crawlerHeritrix</moduleName>
+                    <override>true</override>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

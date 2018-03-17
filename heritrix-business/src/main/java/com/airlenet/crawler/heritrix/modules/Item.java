@@ -7,4 +7,8 @@ package com.airlenet.crawler.heritrix.modules;
 @lombok.Data
 public class Item {
     private String xpath;
+    private String colName;
+    private String key;
+    private String type;
+    private String groovy;
 }

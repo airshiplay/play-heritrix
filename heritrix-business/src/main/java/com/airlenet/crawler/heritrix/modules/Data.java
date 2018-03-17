@@ -9,6 +9,7 @@ import java.util.List;
 @lombok.Data
 public class Data {
     private String type;
+    private String name;
     private String xpath;
     private List<Item> items;
 }

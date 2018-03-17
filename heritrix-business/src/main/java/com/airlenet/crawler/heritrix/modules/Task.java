@@ -10,7 +10,19 @@ import java.util.List;
  * @version 2018-01-06
  */
 @lombok.Data
-public class Job {
+public class Task {
     private String name;
+    private String webDriver;
     private List<Page> pages;
+
+    public Page matchPage(String url){
+        if(pages ==null)
+            return null;
+        for(Page page:pages){
+            if(page.matchUrl(url)){
+                return page;
+            }
+        }
+        return null;
+    }
 }
