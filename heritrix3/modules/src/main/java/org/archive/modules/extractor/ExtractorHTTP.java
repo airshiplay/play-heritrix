@@ -66,7 +66,7 @@ public class ExtractorHTTP extends Extractor {
         addRefreshHeaderLink(curi, "Refresh");
 
         // try /favicon.ico for every HTTP(S) URI
-        addOutlink(curi, "/favicon.ico", LinkContext.INFERRED_MISC, Hop.INFERRED);
+//        addOutlink(curi, "/favicon.ico", LinkContext.INFERRED_MISC, Hop.INFERRED);
         if(getInferRootPage()) {
             addOutlink(curi, "/", LinkContext.INFERRED_MISC, Hop.INFERRED);
         }

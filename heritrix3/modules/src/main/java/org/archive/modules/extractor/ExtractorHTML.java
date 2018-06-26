@@ -369,10 +369,7 @@ public class ExtractorHTML extends ContentExtractor implements InitializingBean 
             CharSequence cs) {
 
         Matcher attr = TextUtils.getMatcher(eachAttributePattern,cs);
-        if(cs.toString().contains("nodeurl"))
-        {
-            System.out.println();
-        }
+
         // Just in case it's an OBJECT or APPLET tag
         String codebase = null;
         ArrayList<String> resources = null;

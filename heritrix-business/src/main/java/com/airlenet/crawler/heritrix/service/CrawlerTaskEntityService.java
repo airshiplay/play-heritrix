@@ -13,6 +13,7 @@ import com.airlenet.crawler.heritrix.repo.CrawlerTaskEntityRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import java.io.File;
 import java.io.IOException;
@@ -92,6 +93,19 @@ public class CrawlerTaskEntityService extends EntityService<CrawlerTaskEntity, L
         //取消robots下载，解析限制
         Element preconditionsElement = (Element) CrawlerBeansUtil.selectSingleNode("/beans/bean[@id='preconditions']", root);///beans/bean/[@id='preconditions']
         preconditionsElement.setAttribute("class", "com.airlenet.crawler.heritrix.modules.PreconditionEnforcer");
+
+        Node beansNode = preconditionsElement.getParentNode();
+
+
+        Element queueAssignmentPolicyElement = (Element) CrawlerBeansUtil.selectSingleNode("/beans/bean[@id='queueAssignmentPolicy']", root);///beans/bean/[@id='preconditions']
+        if(queueAssignmentPolicyElement ==null){
+            queueAssignmentPolicyElement =document.createElement("bean");
+            queueAssignmentPolicyElement.setAttribute("id","queueAssignmentPolicy");
+            beansNode.appendChild(queueAssignmentPolicyElement);
+        }//
+        //com.airlenet.crawler.heritrix.modules.ELFHashQueueAssignmentPolicy
+        queueAssignmentPolicyElement.setAttribute("class", "org.archive.crawler.frontier.HostnameQueueAssignmentPolicy");
+
 
 
         //自定义抽取html文件，TODO 待修改

@@ -36,7 +36,7 @@ public class CrawlerTaskEntity extends DataEntity<AdminUserEntity,Long>{
     /**
      * 任务URL
      * @formtype url
-     * @formtip 例如 http://www.qq.com或
+     * @formtip 例如 http://www.example.com或http://www.example.com/path
      */
     @Column(nullable = false)
     @NotNull
@@ -45,6 +45,7 @@ public class CrawlerTaskEntity extends DataEntity<AdminUserEntity,Long>{
     /**
      * 爬取范围
      * @formtype textarea
+     * @formtip 例如 http://www.example.edu/path/ 或 http://(org,example,www)/path/
      */
     @Column
     private String crawlScope;

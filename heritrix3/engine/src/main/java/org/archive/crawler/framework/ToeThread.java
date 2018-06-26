@@ -133,7 +133,7 @@ implements Reporter, ProgressStatisticsReporter,
 
                 CrawlURI curi = controller.getFrontier().next();
                 
-                
+
                 synchronized(this) {
                     ArchiveUtils.continueCheck();
                     setCurrentCuri(curi);

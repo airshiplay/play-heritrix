@@ -18,10 +18,13 @@
  */
 package org.archive.crawler.io;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
+import java.util.logging.SimpleFormatter;
 
 import org.archive.io.Preformatter;
 import org.archive.modules.CoreAttributeConstants;
@@ -65,7 +68,7 @@ extends Formatter implements Preformatter, CoreAttributeConstants {
     
     protected final ThreadLocal<String> cachedFormat = new ThreadLocal<String>();
     protected boolean logExtraInfo; 
-    
+    protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'");
     public UriProcessingFormatter(boolean logExtraInfo) {
         this.logExtraInfo = logExtraInfo;
     }
@@ -102,7 +105,8 @@ extends Formatter implements Preformatter, CoreAttributeConstants {
              
         StringBuilder buffer = bufLocal.get();
         buffer.setLength(0);
-        buffer.append(ArchiveUtils.getLog17Date(time))
+        buffer.append(simpleDateFormat.format(new Date(time)))
+//        buffer.append(ArchiveUtils.getLog17Date(time))
             .append(" ")
             .append(ArchiveUtils.padTo(curi.getFetchStatus(), 5))
             .append(" ")
